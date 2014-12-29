@@ -22,10 +22,14 @@
       // Random hex color
       var hexer = function() {
         var someColors = [0x00ff00, 0x57FFA0, 0x576DFF, 0xFF7357, 0xF7FF57];
-        return someColors[Math.floor(Math.random() * someColors.length)]
+        return someColors[Math.floor(Math.random() * someColors.length)];
       }
 
-      // Cubes
+      var positioner = function() {
+        return Math.floor(Math.random() * 3);
+      }
+
+      // Cube factory
       var cuber = function() {
         var geometry = new THREE.BoxGeometry(1, 1, 1);
 
@@ -33,11 +37,14 @@
 
         var cube = new THREE.Mesh(geometry, material);
 
+        cube.position.set(positioner(), positioner(), positioner());
+
         scene.add(cube);
 
         return cube;
       }
 
+      // Make some cubes
       var cube = cuber();
 
 
@@ -49,6 +56,9 @@
 
         cube.rotation.x += 0.1;
         cube.rotation.y += 0.1;
+
+        console.log(cube.position)
+
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);
