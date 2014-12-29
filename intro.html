@@ -34,16 +34,22 @@
         var cube = new THREE.Mesh(geometry, material);
 
         scene.add(cube);
+
+        return cube;
       }
 
-      cuber();
-      cuber();
+      var cube = cuber();
 
 
       camera.position.z = 5;
 
       // Render loop
       function render() {
+
+
+        cube.rotation.x += 0.1;
+        cube.rotation.y += 0.1;
+
         requestAnimationFrame(render);
         renderer.render(scene, camera);
       }
