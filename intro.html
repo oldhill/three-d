@@ -21,9 +21,8 @@
 
       // Random hex color
       var hexer = function() {
-        // var someColors = [0x00ff00, '0x57FFA0', '0x576DFF', FF7357 F7FF57]
-
-        return 0x00ff00;
+        var someColors = [0x00ff00, 0x57FFA0, 0x576DFF, 0xFF7357, 0xF7FF57];
+        return someColors[Math.floor(Math.random() * someColors.length)]
       }
 
       // Cubes
