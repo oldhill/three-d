@@ -1,13 +1,21 @@
 <html>
   <head>
-    <title>My first Three.js app</title>
+    <title>Cubes in three.js</title>
+
+    <!-- Yikes the CSS is inline -->
     <style>
       body { margin: 0; }
       canvas { width: 100%; height: 100% }
     </style>
+
   </head>
   <body>
-    <script src="js/three.min.js"></script>
+
+    <!-- Imports -->
+    <script src="js/lib/three.min.js"></script>
+    <script src="js/lib/underscore-min.js"></script>
+
+    <!-- Giant spaghetti ball of js-->
     <script>
 
       // Initialize somewhat blackbox (for now) stuff like the Scene, Camera, and Renderer
@@ -24,21 +32,20 @@
       // Utility functions for random hex color, etc
 
       var hexer = function() {
-        var someColors = [0x00ff00, 0x57FFA0, 0x576DFF, 0xFF7357, 0xF7FF57];
+        var someColors = [0x00ff00, 0x57FFA0, 0x576DFF, 0xFF7357, 0xF7FF57, 0x7D7C7C];
         return someColors[Math.floor(Math.random() * someColors.length)];
-      }
-
-      var positioner = function() {
-        return Math.floor(Math.random() * 3);
       }
 
       // Cube factory. Adds new cube to scene.
       var cuber = function() {
-        var geometry = new THREE.BoxGeometry(1, 1, 1);
-        var material = new THREE.MeshBasicMaterial( { color: hexer()} );
-        var cube = new THREE.Mesh(geometry, material);
+        var geometry = new THREE.BoxGeometry(.5, .5, .5);
 
-        cube.position.set(positioner(), positioner(), positioner());
+        var material = new THREE.MeshBasicMaterial({
+          color: hexer(),
+        });
+
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.set(_.random(-5, 5), _.random(-5, 5), 1)
         scene.add(cube);
       }
 
@@ -51,8 +58,8 @@
         cubes = scene.children;
         for (var i = 0; i < cubes.length; i++) {
           cube = cubes[i];
-          cube.rotation.x += 0.1;
-          cube.rotation.y += 0.1;
+          cube.rotation.x += 0.05;
+          cube.rotation.y += 0.05;
         }
       }
 
